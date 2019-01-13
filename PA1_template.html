@@ -180,7 +180,7 @@ data&lt;- read.csv(&quot;activity.csv&quot;)</code></pre>
 </div>
 <div id="what-is-mean-total-number-of-steps-taken-per-day" class="section level2">
 <h2><span class="header-section-number">1.2</span> What is mean total number of steps taken per day?</h2>
-<p>To calculate this mean value, we must know the value <span class="math display">\[S_{i}\]</span> for each day which is equal to the total of steps per day and then sum all Si: <span class="math display">\[\Sigma S_{i}\]</span> … then divide by the number of days. Or, which is the same thing, calculate mean(S) which is the mean of the variable S.</p>
+<p>To calculate this mean value, we must know the value <span class="math inline">\(S_{i}\)</span> for each day which is equal to the total of steps per day and then sum all Si: <span class="math inline">\(\sum S_{i}\)</span> … then divide by the number of days. Or, which is the same thing, calculate mean(S) which is the mean of the variable S.</p>
 <pre class="r"><code>grdata&lt;- data %&gt;%
         group_by(date)%&gt;%
         summarise(stepsmeanbyday=sum(steps, na.rm = TRUE))</code></pre>
