@@ -3,10 +3,30 @@ title: "Reproducible Research: Peer Assessment 1"
 output: 
   html_document:
     keep_md: true
+    number_sections: true
 ---
 
 
-## Loading and preprocessing the data  
+
+## Loading and preprocessing the data
+
+### Some settings:
+#### Local date and time settings for US compatibility 
+
+
+```r
+Sys.setlocale("LC_TIME","en_US.UTF-8")
+```
+
+```
+## [1] "en_US.UTF-8"
+```
+
+#### Knitr options:  
+
+
+
+### Loading data:  
 
 
 ```r

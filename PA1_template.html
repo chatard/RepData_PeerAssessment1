@@ -126,23 +126,37 @@ $(document).ready(function () {
 
 
 <div id="loading-and-preprocessing-the-data" class="section level2">
-<h2>Loading and preprocessing the data</h2>
+<h2><span class="header-section-number">0.1</span> Loading and preprocessing the data</h2>
+<div id="some-settings" class="section level3">
+<h3><span class="header-section-number">0.1.1</span> Some settings:</h3>
+<div id="local-date-and-time-settings-for-us-compatibility" class="section level4">
+<h4><span class="header-section-number">0.1.1.1</span> Local date and time settings for US compatibility</h4>
+<pre class="r"><code>Sys.setlocale(&quot;LC_TIME&quot;,&quot;en_US.UTF-8&quot;)</code></pre>
+<pre><code>## [1] &quot;en_US.UTF-8&quot;</code></pre>
+</div>
+<div id="knitr-options" class="section level4">
+<h4><span class="header-section-number">0.1.1.2</span> Knitr options:</h4>
+</div>
+</div>
+<div id="loading-data" class="section level3">
+<h3><span class="header-section-number">0.1.2</span> Loading data:</h3>
 <pre class="r"><code>        if(!file.exists(&quot;activity.csv&quot;)){
         unzip(&quot;activity.zip&quot;)
         }
 data&lt;- read.csv(&quot;activity.csv&quot;)</code></pre>
 </div>
+</div>
 <div id="what-is-mean-total-number-of-steps-taken-per-day" class="section level2">
-<h2>What is mean total number of steps taken per day?</h2>
+<h2><span class="header-section-number">0.2</span> What is mean total number of steps taken per day?</h2>
 </div>
 <div id="what-is-the-average-daily-activity-pattern" class="section level2">
-<h2>What is the average daily activity pattern?</h2>
+<h2><span class="header-section-number">0.3</span> What is the average daily activity pattern?</h2>
 </div>
 <div id="imputing-missing-values" class="section level2">
-<h2>Imputing missing values</h2>
+<h2><span class="header-section-number">0.4</span> Imputing missing values</h2>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
-<h2>Are there differences in activity patterns between weekdays and weekends?</h2>
+<h2><span class="header-section-number">0.5</span> Are there differences in activity patterns between weekdays and weekends?</h2>
 </div>
 
 

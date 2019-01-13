@@ -3,10 +3,34 @@ title: "Reproducible Research: Peer Assessment 1"
 output: 
   html_document:
     keep_md: true
+    number_sections: true
 ---
 
 
-## Loading and preprocessing the data  
+
+## Loading and preprocessing the data
+
+### Preliminary settings:
+#### Local date and time settings for US compatibility 
+
+```{r USlocaltime}
+Sys.setlocale("LC_TIME","en_US.UTF-8")
+```
+
+#### Knitr options:  
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+####Loading basic packages.
+
+```{r packages}
+library(dplyr)
+library(ggplot2)
+```
+
+### Loading data:  
 
 ```{r loading}
         if(!file.exists("activity.csv")){
