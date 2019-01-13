@@ -6,8 +6,9 @@ output:
     number_sections: true
 ---
 
-# Peer Assessment 1:  
+# Peer Assignment 1 :    
 
+[inline html preview:](http://htmlpreview.github.io/?https://github.com/chatard/RepData_PeerAssessment1/blob/master/PA1_template.html)
 
 ## Loading and preprocessing the data
 
