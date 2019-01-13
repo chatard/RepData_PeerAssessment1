@@ -8,7 +8,8 @@ output:
 
 ## Loading and preprocessing the data  
 
-```{r loading}
+
+```r
         if(!file.exists("activity.csv")){
         unzip("activity.zip")
         }
