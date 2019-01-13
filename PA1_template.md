@@ -128,6 +128,16 @@ p
 ![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
 
 
+###Making a histogram of the total number of steps taken each day:        
+
+
+```r
+ggplot(grdata, aes(x = stepsmeanbyday)) + 
+        geom_histogram(fill = "blue", binwidth = 1000)
+```
+
+![](PA1_template_files/figure-html/histogram1-1.png)<!-- -->
+
 ## What is the average daily activity pattern?
 
 
