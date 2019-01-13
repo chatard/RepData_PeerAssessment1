@@ -58,8 +58,8 @@ dim(data)
 
 ## What is mean total number of steps taken per day?
 
-To calculate this mean value,  we must know the value $$S_i$$ for each day which is 
-equal to the total of steps per day and then sum all Si: $$\Sigma S_i$$... then divide by 
+To calculate this mean value,  we must know the value $$S_{i}$$ for each day which is 
+equal to the total of steps per day and then sum all Si: $$\Sigma S_{i}$$... then divide by 
 the number of days. 
 Or, which is the same thing, calculate mean(S)
 which is the mean of the variable S.
