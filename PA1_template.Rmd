@@ -100,17 +100,17 @@ ggplot(grdata, aes(x = stepsmeanbyday)) +
     
 
 ```{r daymean}
-  mean(grdata$stepsmeanbyday, na.rm = TRUE)
+  grmean<- mean(grdata$stepsmeanbyday, na.rm = TRUE)
   
 ```
-  mean  =   `r mean(grdata$stepsmeanbyday, na.rm = TRUE) `
+  mean  =   `r toString(grmean) `
   
 ```{r daymedian}  
-median(grdata$stepsmeanbyday, na.rm = TRUE)
+grmedian <- median(grdata$stepsmeanbyday, na.rm = TRUE)
 
 ```
 
-median =   `median(grdata$stepsmeanbyday, na.rm = TRUE)`
+median =   `r toString(grmedian) `
 
 ## What is the average daily activity pattern?
 

@@ -144,8 +144,7 @@ ggplot(grdata, aes(x = stepsmeanbyday)) +
 
 ### Mean and median of the total number of steps taken per day:  
     
-  mean = 
-  
+
 
 ```r
   mean(grdata$stepsmeanbyday, na.rm = TRUE)
@@ -154,7 +153,7 @@ ggplot(grdata, aes(x = stepsmeanbyday)) +
 ```
 ## [1] 9354.23
 ```
-  median = 
+  mean  =   9354.2295082
   
 
 ```r
@@ -164,6 +163,8 @@ median(grdata$stepsmeanbyday, na.rm = TRUE)
 ```
 ## [1] 10395
 ```
+
+median =   `median(grdata$stepsmeanbyday, na.rm = TRUE)`
 
 ## What is the average daily activity pattern?
 
