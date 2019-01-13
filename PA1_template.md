@@ -6,11 +6,12 @@ output:
     number_sections: true
 ---
 
+# Peer Assessment 1:  
 
 
 ## Loading and preprocessing the data
 
-### Some settings:
+### Preliminary settings:
 #### Local date and time settings for US compatibility 
 
 
@@ -25,6 +26,34 @@ Sys.setlocale("LC_TIME","en_US.UTF-8")
 #### Knitr options:  
 
 
+
+####Loading basic packages.
+
+
+```r
+library(dplyr)
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+```r
+library(ggplot2)
+```
 
 ### Loading data:  
 
