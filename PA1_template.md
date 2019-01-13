@@ -134,7 +134,9 @@ p
 ```r
 ggplot(grdata, aes(x = stepsmeanbyday)) + 
         geom_histogram(fill = "blue", binwidth = 1000)+
-        labs(title="Histogram of Steps Taken per Day", x="Number of Steps per Day")        
+        labs(title="Histogram of Steps Taken per Day", 
+             x="Number of Steps per Day",
+             y="Number of times in a day")
 ```
 
 ![](PA1_template_files/figure-html/histogram1-1.png)<!-- -->
