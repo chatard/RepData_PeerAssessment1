@@ -96,8 +96,8 @@ dim(data)
 
 ## What is mean total number of steps taken per day?
 
-To calculate this mean value,  we must know the value Si for each day which is 
-equal to the total of steps per day and then sum all Si ... then divide by 
+To calculate this mean value,  we must know the value $$S_{i}$$ for each day which is 
+equal to the total of steps per day and then sum all Si: $$\Sigma S_{i}$$ ... then divide by 
 the number of days. 
 Or, which is the same thing, calculate mean(S)
 which is the mean of the variable S.
@@ -140,6 +140,30 @@ ggplot(grdata, aes(x = stepsmeanbyday)) +
 ```
 
 ![](PA1_template_files/figure-html/histogram1-1.png)<!-- -->
+
+
+### Mean and median of the total number of steps taken per day:  
+    
+  mean = 
+  
+
+```r
+  mean(grdata$stepsmeanbyday, na.rm = TRUE)
+```
+
+```
+## [1] 9354.23
+```
+  median = 
+  
+
+```r
+median(grdata$stepsmeanbyday, na.rm = TRUE)
+```
+
+```
+## [1] 10395
+```
 
 ## What is the average daily activity pattern?
 
