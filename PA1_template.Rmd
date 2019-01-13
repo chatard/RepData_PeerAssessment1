@@ -112,6 +112,7 @@ grmedian <- median(grdata$stepsmeanbyday, na.rm = TRUE)
 
 median =   `r toString(grmedian) `
 
+
 ## What is the average daily activity pattern?
 
 

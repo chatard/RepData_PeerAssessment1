@@ -204,12 +204,10 @@ data&lt;- read.csv(&quot;activity.csv&quot;)</code></pre>
 </div>
 <div id="mean-and-median-of-the-total-number-of-steps-taken-per-day" class="section level3">
 <h3><span class="header-section-number">1.2.2</span> Mean and median of the total number of steps taken per day:</h3>
-<pre class="r"><code>  mean(grdata$stepsmeanbyday, na.rm = TRUE)</code></pre>
-<pre><code>## [1] 9354.23</code></pre>
-<p>mean = 9354.2295082</p>
-<pre class="r"><code>median(grdata$stepsmeanbyday, na.rm = TRUE)</code></pre>
-<pre><code>## [1] 10395</code></pre>
-<p>median = <code>median(grdata$stepsmeanbyday, na.rm = TRUE)</code></p>
+<pre class="r"><code>  grmean&lt;- mean(grdata$stepsmeanbyday, na.rm = TRUE)</code></pre>
+<p>mean = 9354.22950819672</p>
+<pre class="r"><code>grmedian &lt;- median(grdata$stepsmeanbyday, na.rm = TRUE)</code></pre>
+<p>median = 10395</p>
 </div>
 </div>
 <div id="what-is-the-average-daily-activity-pattern" class="section level2">
