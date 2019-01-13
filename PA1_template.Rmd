@@ -41,8 +41,48 @@ library(ggplot2)
 data<- read.csv("activity.csv")
 ```
 
+
+###Data characteristics:
+
+#### brief look:  
+
+```{r data}
+str(data)
+```
+
+#### dimensions:
+
+```{r dimensions}
+dim(data)
+```
+
 ## What is mean total number of steps taken per day?
 
+To calculate this mean value,  we must know the value Si for each day which is 
+equal to the total of steps per day and then sum all Si ... then divide by 
+the number of days. 
+Or, which is the same thing, calculate mean(S)
+which is the mean of the variable S.
+
+```{r}
+grdata<- data %>%
+        group_by(date)%>%
+        summarise(stepsmeanbyday=sum(steps, na.rm = TRUE))
+```
+
+```{r}
+p <- ggplot(grdata, aes(x=stepsmeanbyday)) + 
+        geom_density(color="darkblue", fill="lightblue") +
+        labs(x= "steps mean by day", y= "probability (mean steps by day =x)")+
+        geom_vline(aes( xintercept = mean(stepsmeanbyday) ),
+        linetype=  "solid", color =  "green" ) +
+        geom_vline(aes( xintercept =median(stepsmeanbyday) ),
+                   linetype=  "solid", color =  "red" )    
+```
+
+```{r}
+p
+```
 
 
 ## What is the average daily activity pattern?

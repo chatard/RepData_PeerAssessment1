@@ -66,7 +66,59 @@ library(ggplot2)
 data<- read.csv("activity.csv")
 ```
 
+
+###Data characteristics:
+
+#### brief look:  
+
+
+```r
+str(data)
+```
+
+```
+## 'data.frame':	17568 obs. of  3 variables:
+##  $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ date    : Factor w/ 61 levels "2012-10-01","2012-10-02",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
+```
+
+#### dimensions:
+
+
+```r
+dim(data)
+```
+
+```
+## [1] 17568     3
+```
+
 ## What is mean total number of steps taken per day?
+
+To calculate this mean value,  we must know the value Si for each day which is 
+equal to the total of steps per day and then sum all Si ... then divide by 
+the number of days. 
+Or, which is the same thing, calculate mean(S)
+which is the mean of the variable S.
+
+
+```r
+grdata<- data %>%
+        group_by(date)%>%
+        summarise(stepsmeanbyday=sum(steps, na.rm = TRUE))
+```
+
+
+```r
+p <- ggplot(grdata, aes(x=stepsmeanbyday)) + 
+        geom_density(color="darkblue", fill="lightblue") +
+        labs(x= "steps mean by day", y= "probability (mean steps by day =x)")+
+        geom_vline(aes( xintercept = mean(stepsmeanbyday) ),
+        linetype=  "solid", color =  "green" ) +
+        geom_vline(aes( xintercept =median(stepsmeanbyday) ),
+                   linetype=  "solid", color =  "red" )    
+```
 
 
 

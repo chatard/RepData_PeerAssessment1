@@ -161,9 +161,36 @@ $(document).ready(function () {
         }
 data&lt;- read.csv(&quot;activity.csv&quot;)</code></pre>
 </div>
+<div id="data-characteristics" class="section level3">
+<h3><span class="header-section-number">1.1.3</span> Data characteristics:</h3>
+<div id="brief-look" class="section level4">
+<h4><span class="header-section-number">1.1.3.1</span> brief look:</h4>
+<pre class="r"><code>str(data)</code></pre>
+<pre><code>## 'data.frame':    17568 obs. of  3 variables:
+##  $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ date    : Factor w/ 61 levels &quot;2012-10-01&quot;,&quot;2012-10-02&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...</code></pre>
+</div>
+<div id="dimensions" class="section level4">
+<h4><span class="header-section-number">1.1.3.2</span> dimensions:</h4>
+<pre class="r"><code>dim(data)</code></pre>
+<pre><code>## [1] 17568     3</code></pre>
+</div>
+</div>
 </div>
 <div id="what-is-mean-total-number-of-steps-taken-per-day" class="section level2">
 <h2><span class="header-section-number">1.2</span> What is mean total number of steps taken per day?</h2>
+<p>To calculate this mean value, we must know the value Si for each day which is equal to the total of steps per day and then sum all Si … then divide by the number of days. Or, which is the same thing, calculate mean(S) which is the mean of the variable S.</p>
+<pre class="r"><code>grdata&lt;- data %&gt;%
+        group_by(date)%&gt;%
+        summarise(stepsmeanbyday=sum(steps, na.rm = TRUE))</code></pre>
+<pre class="r"><code>p &lt;- ggplot(grdata, aes(x=stepsmeanbyday)) + 
+        geom_density(color=&quot;darkblue&quot;, fill=&quot;lightblue&quot;) +
+        labs(x= &quot;steps mean by day&quot;, y= &quot;probability (mean steps by day =x)&quot;)+
+        geom_vline(aes( xintercept = mean(stepsmeanbyday) ),
+        linetype=  &quot;solid&quot;, color =  &quot;green&quot; ) +
+        geom_vline(aes( xintercept =median(stepsmeanbyday) ),
+                   linetype=  &quot;solid&quot;, color =  &quot;red&quot; )    </code></pre>
 </div>
 <div id="what-is-the-average-daily-activity-pattern" class="section level2">
 <h2><span class="header-section-number">1.3</span> What is the average daily activity pattern?</h2>
