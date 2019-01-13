@@ -89,8 +89,8 @@ p
 
 ```{r histogram1}
 ggplot(grdata, aes(x = stepsmeanbyday)) + 
-        geom_histogram(fill = "blue", binwidth = 1000)
-        
+        geom_histogram(fill = "blue", binwidth = 1000)+
+        labs(title="Histogram of Steps Taken per Day")        
 ```
 
 ## What is the average daily activity pattern?
