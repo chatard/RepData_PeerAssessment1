@@ -12,7 +12,7 @@ output:
 
 ## Loading and preprocessing the data
 
-### Preliminary settings:
+### Preliminary settings and libraries packages:
 #### Local date and time settings for US compatibility 
 
 ```{r USlocaltime}
@@ -113,8 +113,30 @@ grmedian <- median(grdata$stepsmeanbyday, na.rm = TRUE)
 median =   `r toString(grmedian) `
 
 
-## What is the average daily activity pattern?
+## What is the average daily activity pattern?  
 
+
+```{r, average}
+dataclone<-data 
+dataclone$interval.factor <- factor(dataclone$interval)
+```
+
+```{r}
+data_interval<-dataclone%>% 
+                group_by(interval.factor) %>%
+                summarise(stepsmean=mean(steps, na.rm = TRUE))
+```
+
+
+```{r, change2numeric}
+data_interval$stepsmean<-as.numeric(data_interval$stepsmean)
+data_interval$interval.factor<-as.numeric(data_interval$interval.factor)
+```
+
+```{r, dayaveragefig, fig.height= 4}
+ggplot(data_interval, aes(interval.factor, as.numeric(stepsmean))) +
+        geom_line(col="blue")
+```
 
 
 ## Imputing missing values
