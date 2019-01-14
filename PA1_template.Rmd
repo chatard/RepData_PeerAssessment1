@@ -70,7 +70,7 @@ grdata<- data %>%
         summarise(stepsmeanbyday=sum(steps, na.rm = TRUE))
 ```
 
-```{r}
+```{r density, fig.height= 3}
 p <- ggplot(grdata, aes(x=stepsmeanbyday)) + 
         geom_density(color="darkblue", fill="lightblue") +
         labs(x= "steps mean by day", y= "probability (mean steps by day =x)")+
@@ -87,7 +87,7 @@ p
 
 ###Making a histogram of the total number of steps taken each day:        
 
-```{r histogram1}
+```{r histogram1, fig.height= 4}
 ggplot(grdata, aes(x = stepsmeanbyday)) + 
         geom_histogram(fill = "blue", binwidth = 1000)+
         labs(title="Histogram of Steps Taken per Day", 

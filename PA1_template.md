@@ -125,7 +125,7 @@ p <- ggplot(grdata, aes(x=stepsmeanbyday)) +
 p
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
 
 
 ###Making a histogram of the total number of steps taken each day:        
