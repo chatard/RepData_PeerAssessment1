@@ -276,6 +276,26 @@ str(grmodifieddata)
 
 ## Are there differences in activity patterns between weekdays and weekends?  
 
+###Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day:
+
+
+```r
+grmodifieddata$week <- ifelse(weekdays(as.Date(grmodifieddata$date)) %in% c("Saturday", "Sunday"), "weekend", "weekday")
+grmodifieddata$week<- as.factor(grmodifieddata$week)
+```
+
+
+```r
+str(grmodifieddata)
+```
+
+```
+## Classes 'tbl_df', 'tbl' and 'data.frame':	61 obs. of  3 variables:
+##  $ date    : Factor w/ 61 levels "2012-10-01","2012-10-02",..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ daysteps: num  10766 126 11352 12116 13294 ...
+##  $ week    : Factor w/ 2 levels "weekday","weekend": 1 1 1 1 1 2 2 1 1 1 ...
+```
+
 
 But, if we take a look at the distribution of the variable that corresponds to the average number of steps per day ... it seems that it is a bimodal distribution : 
 
@@ -296,7 +316,7 @@ p <- ggplot(grdata, aes(x=stepsmeanbyday)) +
 p  
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 
 **the green vertical line represents the average. And the red vertical line is the median.**

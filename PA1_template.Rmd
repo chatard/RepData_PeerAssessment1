@@ -215,6 +215,17 @@ str(grmodifieddata)
 
 ## Are there differences in activity patterns between weekdays and weekends?  
 
+###Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day:
+
+```{r}
+grmodifieddata$week <- ifelse(weekdays(as.Date(grmodifieddata$date)) %in% c("Saturday", "Sunday"), "weekend", "weekday")
+grmodifieddata$week<- as.factor(grmodifieddata$week)
+```
+
+```{r}
+str(grmodifieddata)
+```
+
 
 But, if we take a look at the distribution of the variable that corresponds to the average number of steps per day ... it seems that it is a bimodal distribution : 
 
