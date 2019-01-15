@@ -5,9 +5,8 @@ output:
     keep_md: true
 ---
 
-# Peer Assignment 1 :    
 
-[inline html preview:](http://htmlpreview.github.io/?https://github.com/chatard/RepData_PeerAssessment1/blob/master/PA1_template.html)
+[url link for an inline html preview:](http://htmlpreview.github.io/?https://github.com/chatard/RepData_PeerAssessment1/blob/master/PA1_template.html)
 
 ## Loading and preprocessing the data
 
@@ -109,22 +108,6 @@ grdata<- data %>%
 ```
 
 
-```r
-p <- ggplot(grdata, aes(x=stepsmeanbyday)) + 
-        geom_density(color="darkblue", fill="lightblue") +
-        labs(x= "steps mean by day", y= "probability (mean steps by day =x)")+
-        geom_vline(aes( xintercept = mean(stepsmeanbyday) ),
-        linetype=  "solid", color =  "green" ) +
-        geom_vline(aes( xintercept =median(stepsmeanbyday) ),
-                   linetype=  "solid", color =  "red" )    
-```
-
-
-```r
-p
-```
-
-![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
 
 
 ###Making a histogram of the total number of steps taken each day:        
@@ -216,6 +199,41 @@ maxi-5 interval = 835
 
 ## Imputing missing values
 
+###total number of missing values in the dataset:   
+
+
+```r
+totalNA<-sum(is.na(data))
+```
+
+**totalNA** = 2304  
+
+###strategy for filling in all of the missing values in the dataset:
+
+the simplest strategy would be to replace the missing values by the average number of steps taken in a day by example.  
+
+But, if we take a look at the distribution of the variable that corresponds to the average number of steps per day ... it seems that it is a bimodal distribution : 
+
+
+
+```r
+p <- ggplot(grdata, aes(x=stepsmeanbyday)) + 
+        geom_density(color="darkblue", fill="lightblue") +
+        labs(x= "steps mean by day", y= "probability (mean steps by day =x)")+
+        geom_vline(aes( xintercept = mean(stepsmeanbyday) ),
+        linetype=  "solid", color =  "green" ) +
+        geom_vline(aes( xintercept =median(stepsmeanbyday) ),
+                   linetype=  "solid", color =  "red" )    
+```
+
+
+```r
+p
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+
+**So, we could try to refine our strategy by replacing, the weekend missing values by the average of the steps that correspond to the weekend days and to replace the missing values of the ordinary days by the average calculated on the days of weeks**.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
