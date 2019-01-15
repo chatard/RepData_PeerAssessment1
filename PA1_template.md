@@ -171,7 +171,7 @@ dataclone$interval.factor <- factor(dataclone$interval)
 
 ```r
 data_interval<-dataclone%>% 
-                group_by(interval.factor) %>%
+                group_by(interval) %>%
                 summarise(stepsmean=mean(steps, na.rm = TRUE))
 ```
 
@@ -179,17 +179,23 @@ data_interval<-dataclone%>%
 
 ```r
 data_interval$stepsmean<-as.numeric(data_interval$stepsmean)
-data_interval$interval.factor<-as.numeric(data_interval$interval.factor)
 ```
+
+###time series plot  of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis):   
 
 
 ```r
-ggplot(data_interval, aes(interval.factor, as.numeric(stepsmean))) +
-        geom_line(col="blue")
+#ggplot(data_interval, aes(interval, as.numeric(stepsmean))) +
+        #geom_line(col="blue")
+ggplot(data_interval, aes(interval, as.numeric(stepsmean))) +
+        geom_line(col="blue")+
+        labs(title="Average Daily activity pattern",
+             x="x-axis:five minutes intervals", y="average number of steps")
 ```
 
 ![](PA1_template_files/figure-html/dayaveragefig-1.png)<!-- -->
 
+###Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 ## Imputing missing values
 
