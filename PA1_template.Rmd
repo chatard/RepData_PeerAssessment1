@@ -121,9 +121,7 @@ data_interval$stepsmean<-as.numeric(data_interval$stepsmean)
 ###time series plot  of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis):   
 
 ```{r, dayaveragefig, fig.height= 4}
-#ggplot(data_interval, aes(interval, as.numeric(stepsmean))) +
-        #geom_line(col="blue")
-ggplot(data_interval, aes(interval, as.numeric(stepsmean))) +
+ggplot(data_interval, aes(interval, stepsmean)) +
         geom_line(col="blue")+
         labs(title="Average Daily activity pattern",
              x="x-axis:five minutes intervals", y="average number of steps")
@@ -160,26 +158,90 @@ totalNA<-sum(is.na(data))
 
 ###strategy for filling in all of the missing values in the dataset:
 
-the simplest strategy would be to replace the missing values by the average number of steps taken in a day by example.  
+the simplest strategy would be to replace the missing values by the average number of steps  by example. 
+
+an other strategy could be to replace missing values by median of number of steps.
+
+###new dataset that is equal to the original dataset but with the missing data filled in:
+
+```{r modifieddata}
+modifieddata <- data
+modifieddata$steps[is.na(modifieddata$steps)]<- mean(data$steps, na.rm = TRUE)
+```
+
+### histogram of the total number of steps taken each day:  
+
+```{r}
+grmodifieddata<- modifieddata %>%
+        group_by(date)%>%
+        summarise(daysteps=sum(steps, na.rm = TRUE))
+```
+
+```{r histogram2, fig.height= 4}
+ggplot(grmodifieddata, aes(x = daysteps)) + 
+        geom_histogram(fill = "blue", binwidth = 1000)+
+        labs(title="Histogram of Steps Taken per Day", 
+             x="Number of Steps per Day",
+             y="Number of times a day")
+```
+
+###Calculate and report the mean and median total number of steps taken per day:  
+
+```{r newmeansteps}
+
+newmeansteps<-mean(grmodifieddata$daysteps)
+newmediansteps<-median(grmodifieddata$daysteps)
+```
+
+**newmeansteps** = `r toString(newmeansteps) `  
+**newmediansteps** = `r toString(newmediansteps)`
+
+###Do these values differ from the estimates from the first part of the assignment?  
+
+
+**yes these values are different from values calculated in our first part.**
+
+###What is the impact of imputing missing data on the estimates of the total daily number of steps?
+
+**The value of the median has increased. Now we have médiane equal mean.**
+
+It seems to be in favor of a normal distribution.
+
+```{r}
+str(grmodifieddata)
+
+```
+
+
+## Are there differences in activity patterns between weekdays and weekends?  
+
 
 But, if we take a look at the distribution of the variable that corresponds to the average number of steps per day ... it seems that it is a bimodal distribution : 
 
 
-```{r density, fig.height= 3}
+```{r density, fig.height= 7}
 p <- ggplot(grdata, aes(x=stepsmeanbyday)) + 
         geom_density(color="darkblue", fill="lightblue") +
-        labs(x= "steps mean by day", y= "probability (mean steps by day =x)")+
+        labs(x= "steps mean by day", y= "Pr(mean steps by day).")+
         geom_vline(aes( xintercept = mean(stepsmeanbyday) ),
         linetype=  "solid", color =  "green" ) +
         geom_vline(aes( xintercept =median(stepsmeanbyday) ),
-                   linetype=  "solid", color =  "red" )    
+                   linetype=  "solid", color =  "red" ) 
+        
 ```
 
 ```{r}
-p
+p  
 ```
 
-**So, we could try to refine our strategy by replacing, the weekend missing values by the average of the steps that correspond to the weekend days and to replace the missing values of the ordinary days by the average calculated on the days of weeks**.
+
+**the green vertical line represents the average. And the red vertical line is the median.**
+**We can therefore choose to replace the missing values either by the mean or by the median**
 
 
-## Are there differences in activity patterns between weekdays and weekends?
+
+
+
+
+
+*So, we could try to refine our strategy by replacing, the weekend missing values by the average of the steps that correspond to the weekend days and to replace the missing values of the ordinary days by the average calculated on the days of weeks.*

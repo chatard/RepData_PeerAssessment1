@@ -167,9 +167,7 @@ data_interval$stepsmean<-as.numeric(data_interval$stepsmean)
 
 
 ```r
-#ggplot(data_interval, aes(interval, as.numeric(stepsmean))) +
-        #geom_line(col="blue")
-ggplot(data_interval, aes(interval, as.numeric(stepsmean))) +
+ggplot(data_interval, aes(interval, stepsmean)) +
         geom_line(col="blue")+
         labs(title="Average Daily activity pattern",
              x="x-axis:five minutes intervals", y="average number of steps")
@@ -210,7 +208,74 @@ totalNA<-sum(is.na(data))
 
 ###strategy for filling in all of the missing values in the dataset:
 
-the simplest strategy would be to replace the missing values by the average number of steps taken in a day by example.  
+the simplest strategy would be to replace the missing values by the average number of steps  by example. 
+
+an other strategy could be to replace missing values by median of number of steps.
+
+###new dataset that is equal to the original dataset but with the missing data filled in:
+
+
+```r
+modifieddata <- data
+modifieddata$steps[is.na(modifieddata$steps)]<- mean(data$steps, na.rm = TRUE)
+```
+
+### histogram of the total number of steps taken each day:  
+
+
+```r
+grmodifieddata<- modifieddata %>%
+        group_by(date)%>%
+        summarise(daysteps=sum(steps, na.rm = TRUE))
+```
+
+
+```r
+ggplot(grmodifieddata, aes(x = daysteps)) + 
+        geom_histogram(fill = "blue", binwidth = 1000)+
+        labs(title="Histogram of Steps Taken per Day", 
+             x="Number of Steps per Day",
+             y="Number of times a day")
+```
+
+![](PA1_template_files/figure-html/histogram2-1.png)<!-- -->
+
+###Calculate and report the mean and median total number of steps taken per day:  
+
+
+```r
+newmeansteps<-mean(grmodifieddata$daysteps)
+newmediansteps<-median(grmodifieddata$daysteps)
+```
+
+**newmeansteps** = 10766.1886792453  
+**newmediansteps** = 10766.1886792453
+
+###Do these values differ from the estimates from the first part of the assignment?  
+
+
+**yes these values are different from values calculated in our first part.**
+
+###What is the impact of imputing missing data on the estimates of the total daily number of steps?
+
+**The value of the median has increased. Now we have médiane equal mean.**
+
+It seems to be in favor of a normal distribution.
+
+
+```r
+str(grmodifieddata)
+```
+
+```
+## Classes 'tbl_df', 'tbl' and 'data.frame':	61 obs. of  2 variables:
+##  $ date    : Factor w/ 61 levels "2012-10-01","2012-10-02",..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ daysteps: num  10766 126 11352 12116 13294 ...
+```
+
+
+## Are there differences in activity patterns between weekdays and weekends?  
+
 
 But, if we take a look at the distribution of the variable that corresponds to the average number of steps per day ... it seems that it is a bimodal distribution : 
 
@@ -219,21 +284,28 @@ But, if we take a look at the distribution of the variable that corresponds to t
 ```r
 p <- ggplot(grdata, aes(x=stepsmeanbyday)) + 
         geom_density(color="darkblue", fill="lightblue") +
-        labs(x= "steps mean by day", y= "probability (mean steps by day =x)")+
+        labs(x= "steps mean by day", y= "Pr(mean steps by day).")+
         geom_vline(aes( xintercept = mean(stepsmeanbyday) ),
         linetype=  "solid", color =  "green" ) +
         geom_vline(aes( xintercept =median(stepsmeanbyday) ),
-                   linetype=  "solid", color =  "red" )    
+                   linetype=  "solid", color =  "red" ) 
 ```
 
 
 ```r
-p
+p  
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
-
-**So, we could try to refine our strategy by replacing, the weekend missing values by the average of the steps that correspond to the weekend days and to replace the missing values of the ordinary days by the average calculated on the days of weeks**.
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
 
-## Are there differences in activity patterns between weekdays and weekends?
+**the green vertical line represents the average. And the red vertical line is the median.**
+**We can therefore choose to replace the missing values either by the mean or by the median**
+
+
+
+
+
+
+
+*So, we could try to refine our strategy by replacing, the weekend missing values by the average of the steps that correspond to the weekend days and to replace the missing values of the ordinary days by the average calculated on the days of weeks.*
