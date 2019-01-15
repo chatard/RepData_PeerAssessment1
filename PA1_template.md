@@ -3,7 +3,6 @@ title: "Reproducible Research: Peer Assessment 1"
 output: 
   html_document:
     keep_md: true
-    number_sections: true
 ---
 
 # Peer Assignment 1 :    
@@ -195,7 +194,25 @@ ggplot(data_interval, aes(interval, as.numeric(stepsmean))) +
 
 ![](PA1_template_files/figure-html/dayaveragefig-1.png)<!-- -->
 
-###Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+###Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?  
+
+#### maximum number of steps:
+
+
+```r
+maxisteps<-max(data_interval$stepsmean)
+```
+
+maximum nb. of steps = 206.169811320755
+
+#### 5-minute interval that contains the maximum number of steps:
+
+
+```r
+maxi5interval<-data_interval$interval[which.max(data_interval$stepsmean)]
+```
+
+maxi-5 interval = 835
 
 ## Imputing missing values
 
