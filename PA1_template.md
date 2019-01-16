@@ -280,52 +280,64 @@ str(grmodifieddata)
 
 
 ```r
-grmodifieddata$week <- ifelse(weekdays(as.Date(grmodifieddata$date)) %in% c("Saturday", "Sunday"), "weekend", "weekday")
-grmodifieddata$week<- as.factor(grmodifieddata$week)
+# grmodifieddata$week <- ifelse(weekdays(as.Date(grmodifieddata$date)) %in% c("Saturday", "Sunday"), "weekend", "weekday")
+# grmodifieddata$week<- as.factor(grmodifieddata$week)
+Sys.setlocale("LC_TIME","en_US.UTF-8")
+```
+
+```
+## [1] "en_US.UTF-8"
+```
+
+```r
+modifieddata$week <- ifelse(weekdays(as.Date(modifieddata$date)) %in% c("Saturday", "Sunday"),
+"weekend", "weekday")
+modifieddata$week<- as.factor(modifieddata$week)
 ```
 
 
 ```r
-str(grmodifieddata)
+str(modifieddata)
 ```
 
 ```
-## Classes 'tbl_df', 'tbl' and 'data.frame':	61 obs. of  3 variables:
-##  $ date    : Factor w/ 61 levels "2012-10-01","2012-10-02",..: 1 2 3 4 5 6 7 8 9 10 ...
-##  $ daysteps: num  10766 126 11352 12116 13294 ...
-##  $ week    : Factor w/ 2 levels "weekday","weekend": 1 1 1 1 1 2 2 1 1 1 ...
+## 'data.frame':	17568 obs. of  4 variables:
+##  $ steps   : num  37.4 37.4 37.4 37.4 37.4 ...
+##  $ date    : Factor w/ 61 levels "2012-10-01","2012-10-02",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
+##  $ week    : Factor w/ 2 levels "weekday","weekend": 1 1 1 1 1 1 1 1 1 1 ...
 ```
-
-
-But, if we take a look at the distribution of the variable that corresponds to the average number of steps per day ... it seems that it is a bimodal distribution : 
 
 
 
 ```r
-p <- ggplot(grdata, aes(x=stepsmeanbyday)) + 
-        geom_density(color="darkblue", fill="lightblue") +
-        labs(x= "steps mean by day", y= "Pr(mean steps by day).")+
-        geom_vline(aes( xintercept = mean(stepsmeanbyday) ),
-        linetype=  "solid", color =  "green" ) +
-        geom_vline(aes( xintercept =median(stepsmeanbyday) ),
-                   linetype=  "solid", color =  "red" ) 
+wdmodifieddata<- modifieddata %>%
+        group_by(week, interval)%>%
+        summarise(wdsteps=mean(steps))
+str(wdmodifieddata)
 ```
+
+```
+## Classes 'grouped_df', 'tbl_df', 'tbl' and 'data.frame':	576 obs. of  3 variables:
+##  $ week    : Factor w/ 2 levels "weekday","weekend": 1 1 1 1 1 1 1 1 1 1 ...
+##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
+##  $ wdsteps : num  7.01 5.38 5.14 5.16 5.07 ...
+##  - attr(*, "vars")= chr "week"
+##  - attr(*, "drop")= logi TRUE
+```
+
+
 
 
 ```r
-p  
+ggplot(wdmodifieddata, aes(x=interval, y=wdsteps)) + 
+        geom_line(col="blue") + 
+        facet_wrap(~ week, nrow=2, ncol=1) +
+        labs(x="5-min. interval.", y="steps number",
+             title="number of steps comparison:   weekdays vs. weekends")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
+**finally: it seems that it is possible to highlight a difference depending on whether it is weekend or weekdays.**
 
-**the green vertical line represents the average. And the red vertical line is the median.**
-**We can therefore choose to replace the missing values either by the mean or by the median**
-
-
-
-
-
-
-
-*So, we could try to refine our strategy by replacing, the weekend missing values by the average of the steps that correspond to the weekend days and to replace the missing values of the ordinary days by the average calculated on the days of weeks.*
